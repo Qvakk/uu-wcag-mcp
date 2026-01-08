@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+  uu-tilsynet:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: uu-tilsynet:latest
+    container_name: uu-tilsynet
+    restart: unless-stopped
+    command: ["tail", "-f", "/dev/null"] # Keep container running for docker exec
+    extra_hosts:
+      - "host.docker.internal:host-gateway" # Enable container to access host machine
+    environment:
+      # === Logging ===
+      - LOG_LEVEL=info
+
+      # === Crawling Settings ===
+      - MAX_DEPTH=3
+      - MAX_PAGES=50
+      - CRAWL_DELAY=1000
+
+      # === pa11y Configuration ===
+      - TIMEOUT=60000
+      - WCAG_STANDARD=WCAG2AA
+      - HEADLESS=true
+
+      # === SPA/i18n Support ===
+      # Wait 8 seconds for translations and dynamic content to load
+      # Reduce to 5000 if not using i18n
+      - PA11Y_WAIT=8000
+
+      # Wait until ALL network requests complete (best for i18n/SPAs)
+      # Options: load, domcontentloaded, networkidle0, networkidle2
+      - PA11Y_WAIT_UNTIL=networkidle0
+
+      # === Viewport ===
+      - VIEWPORT_WIDTH=1920
+      - VIEWPORT_HEIGHT=1080
+
+      # === Report Defaults ===
+      - DEFAULT_FORMAT=markdown
+      - DEFAULT_LANGUAGE=no
+
+      # === Localhost Testing ===
+      - ALLOW_LOCALHOST=true
+    healthcheck:
+      test: ["CMD", "node", "-e", "console.log('healthy')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - uu-tilsynet-network
+
+networks:
+  uu-tilsynet-network:
+    driver: bridge

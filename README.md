@@ -330,7 +330,3 @@ uu-wcag-mcp/
 ├── package.json              # Node.js 22+ dependencies
 └── README.md
 ```
-
-## License
-
-MIT

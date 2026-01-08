@@ -1,92 +1,52 @@
-# Git ignore file for WCAG MCP Server
+# ================================================
+# WCAG MCP Server - Git Ignore
+# ================================================
 
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
+# === Node.js ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# === Build outputs ===
 dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
+build/
+coverage/
 
-# PyInstaller
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
-cover/
-
-# Environments
+# === Environment ===
 .env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+.env.local
+.env.*.local
 
-# IDEs
+# === Logs ===
+logs/
+*.log
+
+# === IDEs ===
 .vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
 .idea/
 *.swp
 *.swo
 *~
 
-# OS
+# === OS ===
 .DS_Store
 .DS_Store?
 ._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
+ehthumbs.db
 
-# Project specific
+# === Project specific ===
 reports/
-logs/
-*.log
-temp/
-tmp/
-
-# MCP specific
-mcp_config.json
-
-# Report outputs (but keep README and docs)
 reports/*.md
 reports/*.xlsx
 reports/*.html
-*.xlsx
+temp/
+tmp/
 
-node_modules/
-dist/
+# === Test outputs ===
+.nyc_output/
+*.lcov

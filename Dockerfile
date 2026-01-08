@@ -1,7 +1,7 @@
 # ============================================
 # Stage 1: Dependencies
 # ============================================
-FROM node:20-slim AS deps
+FROM node:22-slim AS deps
 
 WORKDIR /app
 
@@ -15,7 +15,7 @@ RUN npm ci --only=production --ignore-scripts && \
 # ============================================
 # Stage 2: Final minimal image
 # ============================================
-FROM node:20-slim
+FROM node:22-slim
 
 # Install Chrome and required dependencies
 RUN apt-get update && apt-get install -y \

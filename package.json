@@ -1,5 +1,5 @@
 {
-    "name": "wcag-mcp-server",
+    "name": "uu-wcag-mcp",
     "version": "1.0.0",
     "description": "Model Context Protocol server for WCAG compliance analysis using pa11y",
     "main": "src/index.js",
@@ -28,7 +28,9 @@
         "axios": "^1.12.0",
         "exceljs": "^4.4.0",
         "winston": "^3.11.0",
-        "dotenv": "^17.0.0"
+        "dotenv": "^17.0.0",
+        "express": "^4.21.0",
+        "cors": "^2.8.5"
     },
     "devDependencies": {
         "nodemon": "^3.0.0",

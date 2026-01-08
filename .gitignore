@@ -79,16 +79,14 @@ logs/
 temp/
 tmp/
 
-# Docker
-.dockerignore
-
 # MCP specific
 mcp_config.json
 
-# Report outputs
-*.md
+# Report outputs (but keep README and docs)
+reports/*.md
+reports/*.xlsx
+reports/*.html
 *.xlsx
-*.html
 
 node_modules/
 dist/

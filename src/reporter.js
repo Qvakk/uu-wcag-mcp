@@ -2,8 +2,8 @@
  * Excel Reporter - Generates WCAG reports using UU-tilsynet Excel templates
  */
 import ExcelJS from 'exceljs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import logger from './logger.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -72,12 +72,12 @@ export class ExcelReporter {
     
     for (const issue of allIssues) {
       // Extract WCAG criterion from issue code
-      // Example: "WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail"
+      // Example: "WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail" -> "1.4.3"
       const wcagMatch = issue.code?.match(/Principle(\d)\.Guideline(\d+)_(\d+)\.(\d+)_(\d+)_(\d+)/);
       
       if (wcagMatch) {
         const [, principle, guideline1, guideline2, sc1, sc2, sc3] = wcagMatch;
-        const criterion = `${guideline1}.${guideline2}.${sc1}.${sc2}.${sc3}`;
+        const criterion = `${sc1}.${sc2}.${sc3}`;
         
         if (!violationsByCriteria[criterion]) {
           violationsByCriteria[criterion] = {

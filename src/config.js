@@ -38,17 +38,17 @@ export const config = {
         '--no-crash-upload',
         '--no-zygote'
       ],
-      headless: process.env.HEADLESS !== 'false'
+      headless: process.env.HEADLESS !== 'false',
+      // Viewport size (helps with responsive testing)
+      defaultViewport: {
+        width: parseInt(process.env.VIEWPORT_WIDTH) || 1280,
+        height: parseInt(process.env.VIEWPORT_HEIGHT) || 720
+      }
     },
     standard: process.env.WCAG_STANDARD || 'WCAG2AA',
     screenCapture: false,
     includeNotices: false,
     includeWarnings: true,
-    // Viewport size (helps with responsive testing)
-    viewport: {
-      width: parseInt(process.env.VIEWPORT_WIDTH) || 1280,
-      height: parseInt(process.env.VIEWPORT_HEIGHT) || 720
-    },
     // User agent
     userAgent: process.env.USER_AGENT || 'WCAG-Analyzer/1.0 (pa11y)'
   }

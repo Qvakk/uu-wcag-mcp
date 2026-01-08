@@ -3,7 +3,7 @@
  */
 import axios from 'axios';
 import * as cheerio from 'cheerio';
-import { URL } from 'url';
+import { URL } from 'node:url';
 import config from './config.js';
 import logger from './logger.js';
 

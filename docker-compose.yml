@@ -1,17 +1,24 @@
-version: "3.8"
-
 services:
-  uu-tilsynet:
+  uu-wcag-mcp:
     build:
       context: .
       dockerfile: Dockerfile
-    image: uu-tilsynet:latest
-    container_name: uu-tilsynet
+    image: uu-wcag-mcp:latest
+    container_name: uu-wcag-mcp
     restart: unless-stopped
-    command: ["tail", "-f", "/dev/null"] # Keep container running for docker exec
+    # Use HTTP/SSE transport (runs the node server)
+    # For stdio mode, use: command: ["tail", "-f", "/dev/null"]
+    command: ["node", "src/index.js"]
+    ports:
+      - "3100:3000"  # Map container port 3000 to host port 3100
     extra_hosts:
       - "host.docker.internal:host-gateway" # Enable container to access host machine
     environment:
+      # === Transport Mode ===
+      # Options: 'stdio' or 'http' (SSE)
+      - MCP_TRANSPORT=http
+      - MCP_PORT=3000
+
       # === Logging ===
       - LOG_LEVEL=info
 

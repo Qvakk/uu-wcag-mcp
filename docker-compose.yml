@@ -10,7 +10,7 @@ services:
     # For stdio mode, use: command: ["tail", "-f", "/dev/null"]
     command: ["node", "src/index.js"]
     ports:
-      - "3100:3000"  # Map container port 3000 to host port 3100
+      - "8009:3000"  # Map container port 3000 to host port 8009
     extra_hosts:
       - "host.docker.internal:host-gateway" # Enable container to access host machine
     environment:
@@ -52,7 +52,7 @@ services:
       # === Localhost Testing ===
       - ALLOW_LOCALHOST=true
     healthcheck:
-      test: ["CMD", "node", "-e", "console.log('healthy')"]
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3000/health').then(r => r.ok ? process.exit(0) : process.exit(1)).catch(() => process.exit(1))"]
       interval: 30s
       timeout: 10s
       retries: 3
